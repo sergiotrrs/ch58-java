@@ -42,6 +42,44 @@ public class IfConditional {
 				if( condicion == 3 ) resultado = "la condicion es 3";
 				else resultado = "No cumple con ninguna condición anterior";
 		
+		
+		/*
+		 * Operador ternario.
+		 * 
+		 * Sintaxis: expresión ? respuesta_si_es_verdadera : si_es_falsa
+		 *
+		 * El operador ternario en Java, también conocido como operador 
+		 * condicional, es una forma concisa de escribir una sentencia 
+		 * if-else simple. Permite asignar un valor a una variable 
+		 * o ejecutar una expresión basándose en una condición booleana.
+		 *
+		 * Si las expresiones o la condición son muy complejas, el 
+		 * operador ternario puede volverse difícil de leer y entender. 
+		 * En esos casos, es preferible usar una sentencia if-else 
+		 * tradicional.
+		 *
+		 * Realizar el ejercicio anterior usado el operador ternario
+		 */
+		
+		int number = 10;
+		String message = number >= 10 ?  "Es mayor" : "Es menor";
+		
+		/*
+		 *  Evaluar una variable que indique si la persona es miembro
+		 *  premium o no.
+		 *  Si es miembro premium, obtiene 15% de descuento, sino 5%
+		 *  Imprimir en consola el porcentaje asignado
+		 *  - Realizar el ejercicio usando if-else y el operador ternario
+		 */
+		boolean miembroPremium = false;
+		
+		if (miembroPremium)
+			System.out.println("Obtiene 15% de descuento");
+		else
+			System.out.println("Obtiene un 5% de descuento");
+		
+		String message2 = miembroPremium ? "Obtiene 15% de descuento" : "Obtiene 5% de descuento";
+		System.out.println(message2);
 	}
 
 }

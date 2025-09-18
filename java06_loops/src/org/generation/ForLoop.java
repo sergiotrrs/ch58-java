@@ -95,10 +95,21 @@ public class ForLoop {
 		}
 		
 		
-		for (int i = 1; i <= 5; i++) {
+		for (int i = 1; i <= 5 ; i++) {
 			if (i == 2)	continue;
 			System.out.println("Valor de i: " + i);
 		}
+		
+		/*
+		 * Imprimir los números pares del 1 al 20
+		 * Salida:
+		 *  2
+		 *  4
+		 *  6...
+		 *  18
+		 *  20
+		 * 
+		 */
 
 	}
 

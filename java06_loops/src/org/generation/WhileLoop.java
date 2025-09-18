@@ -1,5 +1,7 @@
 package org.generation;
 
+import java.util.Scanner;
+
 public class WhileLoop {
 
 	public static void main(String[] args) {
@@ -35,7 +37,21 @@ public class WhileLoop {
 		* el mensaje de bienvenida, en caso contrario despedirse
 		* y terminar el programa
 		*/
-		
+		Scanner sc = new Scanner(System.in);
+        boolean continuar = true;
+        
+        while (continuar) {
+            System.out.println("¡Bienvenido al sistema de lloración!"); 
+            
+            System.out.print("¿Deseas seguir llorando? (s/n): ");
+            char respuesta = sc.nextLine().toLowerCase().charAt(0);
+            
+            if (respuesta != 's') { // Si la respuesta es "n", termina el programa
+                System.out.println("Adios, se feliz :) ");
+                continuar = false;
+            }
+        }
+        sc.close();
 		
 		
 

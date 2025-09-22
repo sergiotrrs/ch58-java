@@ -48,16 +48,38 @@ public class HashSetConceptos {
 		for (String book : library) {
 			System.out.println("Libro: " + book);
 		}
-		
+
 		/*
-		 * Crear una lista de 7 canciones.
-		 * Usando una colección de tipo hashset, agregar 9 canciones
-		 * Pero 2 de esas caciones están repetidas, No se deben agregar repetidas.
+		 * Crear una lista de 7 canciones. Usando una colección de tipo hashset, agregar
+		 * 9 canciones Pero 2 de esas caciones están repetidas, No se deben agregar
+		 * repetidas.
 		 * 
-		 * Recomendación: antes de agregar las canciones convierte el string a minúsculas
+		 * Recomendación: antes de agregar las canciones convierte el string a
+		 * minúsculas
 		 * 
 		 * Imprimir la lista de las 7 canciones.
 		 */
+		// Crear una lista de 7 canciones usando una colección de tipo hashset
+		HashSet<String> playList = new HashSet<>();
+		playList.add("Schism".toLowerCase());
+		playList.add("Poison".toLowerCase());
+		playList.add("Jane".toLowerCase());
+		playList.add("Against the wall".toLowerCase());
+		playList.add("Welcome to the Black Parade".toLowerCase());
+		playList.add("I just wanna live".toLowerCase());
+		playList.add("Untitled".toLowerCase());
+
+		// Agregar 9 canciones
+
+		playList.add("Untitled".toLowerCase());
+		playList.add("Untitled".toLowerCase());
+
+		// Pero 2 de esas caciones están repetidas, No se deben agregar repetidas.
+		// Recomendación: antes de agregar las canciones convierte el string a
+		// minúsculas
+		// Imprimir la lista de las 7 canciones.
+
+		System.out.println(playList);
 
 	}
 

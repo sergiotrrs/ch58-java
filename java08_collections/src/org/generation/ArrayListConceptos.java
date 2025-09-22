@@ -40,6 +40,65 @@ public class ArrayListConceptos {
 		
 		// Agregar un elemento con el método add() 
 		fruits.add("Jícama");
+		fruits.add("Piña");
+		fruits.add("Jitomate");
+		
+		System.out.println( fruits );
+		
+		
+		// ArrayList permite elementos duplicados
+		fruits.add("Mango");
+		fruits.add("Mango");
+		
+		System.out.println(fruits);
+		
+		// Obtener el tamaño de la colección, size()
+		System.out.println("N. de frutas: " + fruits.size() ); // 4
+		
+		// Devolver un elemento en una posición especificada, get( int indice)
+		System.out.println("Índice 2 es: " + fruits.get(2)); // Jitomate
+		
+		// Remover un elemento, remove(int indice), remove(Object)
+		System.out.println("Removiendo el índice 3 :" + fruits.remove(3)); // Mango
+		System.out.println( fruits );
+		
+		// Reemplzar un elemento, set(int indice, E element)
+		System.out.println("Reemplazamos el índice 1: " + fruits.set(1, "Melón")); // Piña
+		System.out.println( fruits );
+		
+		// Verificar si un elemento existe, contains(E element)
+		System.out.println("Existe Papaya ? " + fruits.contains("Papaya")); // false
+		System.out.println("Existe Mango ? " + fruits.contains("Mango")); // true
+		
+		// Iterar cada uno de los elementos usando for loop
+		for (int i = 0; i < fruits.size(); i++) {
+			System.out.println("Fruta: " + fruits.get(i));
+		}
+		
+		// Iterar cada uno de los elemento usando for enhanced
+		for (String fruit : fruits) {
+			System.out.println("For enhanced: " + fruit);
+		}
+		
+		// ====================================================
+		// Crear una colección de tipo ArrayList para marcas de
+		// automóviles, agregar 4 marcas de autos.
+		ArrayList<String> cars = new ArrayList<>();
+		cars.add("Mercedes");
+		cars.add("Bmw");
+		cars.add("Audi");
+		cars.add("Jeep");
+		
+		System.out.println(cars);
+		
+		/*
+		 * - Reemplazar el Bmw, por un BYD
+		 * - Verificar que exista "Tesla"
+		 * - Eliminar "Audi"
+		 * - Mostrar el número de elementos totales en la colección
+		 * - Imprimir cada uno de los elementos de la colección.
+		 */
+		
 
 	}
 

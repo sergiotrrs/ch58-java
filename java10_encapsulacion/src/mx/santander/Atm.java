@@ -26,8 +26,27 @@ package mx.santander;
 public class Atm {
 	private int serialNumber; // 0
 	private double balance; // 0.0
-	private String model; // null
+	private String model = "Mi cajero automático"; // null
 	private String address; // null
+	private static int counter = 10;
+	
+	/**
+	 * Bloque de inicialización no-estático
+	 * - Simpre se ejecutan, no importanto que contructor se llame
+	 * - Se ejecuta antes del cuerpo del constructor
+	 */
+	{
+		this.serialNumber = ++counter;		
+	}
+	
+	static {
+		counter = 100;
+	}
+
+	
+	public Atm() {
+		
+	}
 	
 	/* Métodos constructores
 	 *  Un constructor es un tipo especial de método que se llama automáticamente
@@ -45,12 +64,25 @@ public class Atm {
 	 *    <ModificarDeAcceso> NombreDeLaClase(parámetros para inicializar atributos)
 	 */
 	public Atm(double newBalance, String model, String address ) {
+		this();
 		balance = newBalance;
 		this.model = model;
 		this.address = address;
 	}
 	
-
+	public Atm(double balance){
+		this(balance, "Generic Model", "N/A");		
+		// this.balance = balance;
+		// this.model = "Generic Model";
+		// this.address = "N/A";
+		// this.serialNumber = ++counter;		
+	}
+	
+	public Atm(String balance) {
+		this( Double.parseDouble(balance) );
+	}
+	
+	
 	/*
 	 * Para acceder a los atributos encapsulados, usamos
 	 * los métodos Setters y Getters.
@@ -99,8 +131,26 @@ public class Atm {
 		return "Atm [serialNumber=" + serialNumber + ", balance=" + balance + ", model=" + model + ", address="
 				+ address + "]";
 	}
+
+	public static int getCounter() {
+		return counter;
+	}
 	
-	
-	
+	/**
+	 *  factory method
+	 *  https://refactoring.guru/es/design-patterns
+	 *  Los patrones de diseño creacionales se utilizan para promover 
+	 *  el código limpio, modular y fácil de mantener, así como para 
+	 *  mejorar la flexibilidad y la reutilización del código.
+	 *  
+	 *  Patrón de diseño: Es una solución reutilizable y 
+	 *  probada para problemas comunes en el desarrollo de software.
+	 *  Anti-patrón: Es una práctica de diseño que parece 
+	 *  útil pero que en realidad genera problemas de 
+	 *  mantenimiento, rendimiento o escalabilidad.
+	 */
+     public static Atm createAirPortAtm(){
+    	 return new Atm(2_000_000, "T-2000", "Airport");
+     }
 
 }

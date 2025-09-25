@@ -18,7 +18,7 @@ package com.rovio;
  *  Las clases abstractas se recomienda utilizar para
  *  clases que estén estrechamente relacionadas ( is-A )
  */
-abstract public class Bird {
+abstract public class Bird implements Smashable {
 	private String name;
 	private String color;
 	
@@ -73,6 +73,12 @@ abstract public class Bird {
 	 *  de hacer tu clase abstracta.
 	 */
 	public abstract void useSpecialAbility();
+	
+	@Override
+	public void onImpact() {
+		System.out.println( this.name + " se impacta");
+		
+	}
 
 }
 

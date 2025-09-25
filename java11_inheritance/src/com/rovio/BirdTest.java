@@ -8,8 +8,28 @@ public class BirdTest {
 		//Bird myBird = new Bird();
 		
 		RedBird myBird = new RedBird(true);
-		myBird.launch();
-		myBird.useSpecialAbility();
+        YellowBird chuck = new YellowBird(55);
+        BlackBird bomb = new BlackBird(12);
+        LittleYellowBird norris = new LittleYellowBird(10);
+        
+        
+        myBird.launch();
+        myBird.useSpecialAbility();
+        myBird.onImpact(); // grita, aletea, se le cae una pluma al impactar
+        System.out.println();
+        chuck.launch();
+        chuck.useSpecialAbility();
+        chuck.onImpact(); // " se impacta"
+        System.out.println();
+        bomb.launch();
+        bomb.useSpecialAbility();
+        bomb.onImpact();
+        System.out.println();
+        norris.launch();
+        norris.useSpecialAbility();
+        norris.onImpact();
+        
+        
 
 	}
 

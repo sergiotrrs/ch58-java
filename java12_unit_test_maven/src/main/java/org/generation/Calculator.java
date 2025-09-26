@@ -6,9 +6,15 @@ public class Calculator {
 		return a  + b;
 	}
 	
-	// Método que haga la resta de dos números
-	
-	
-	// Método que realice la división de dos números
+	/// Metodo que haga la resta de dos numeros
+	public int subtraction(int a, int b) {
+		return a - b;
+	}
+
+	// Metodo que realice la division de dos numeros
+	public int division(int a, int b) {
+		return a / b;
+	}
+
 
 }

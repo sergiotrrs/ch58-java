@@ -1,6 +1,7 @@
 package org.generation;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.*;
 
@@ -24,6 +25,13 @@ public class CalculatorBeforeEachTest {
 
 	}
 
+	@Test
+	@DisplayName("Sumatoria de números de punto flotante positivos")
+	void addDoubleTest() {
+		assertEquals(5, cal.add(3.0, 2), "Suma 3.0 y 2 debe ser 5.0");
+		assertEquals(.3, cal.add(.1, .2), 0.00001, ".1+.2 = .3 con delta de error");
+	}
+	
 	// Probar el metodo de resta
 	@DisplayName("Resta de numeros positivos")
 	@Test
@@ -41,6 +49,14 @@ public class CalculatorBeforeEachTest {
 		assertEquals(5, cal.division(10, 2), "Division 10 entre 2 debe ser 5");
 		assertEquals(17, cal.division(70, 4), "Division 70 entre 4 debe ser 17");
 		assertEquals(1_500_000, cal.division(3_000_000, 2), "Division 3_000_000 entre 2 debe ser 1_500_000");
+	}
+	
+	@DisplayName("División por cero")
+	@Test
+	void divisionZeroTest() {
+		// assertEquals(0, cal.division(10, 0), "Division por cero");
+		//assertThrows(ArithmeticException.class, ()-> cal.division(10,0) );
+		assertThrows(IllegalArgumentException.class, ()-> cal.division(10,0) );
 	}
 
 }

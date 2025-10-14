@@ -48,5 +48,25 @@ import com.monkey.tower.app.model.Role;
  *   de transacciones, flush o la eliminación de entidades en lotes.
  */
 public interface RoleRepository extends CrudRepository<Role, Long> {
+	
+	/*
+	 * Los query methods se refieren a métodos definidos en las 
+	 * interfaces de repositorios en Spring Data JPA (y otras 
+	 * implementaciones de Spring Data) que permiten generar 
+	 * consultas de manera automática a partir del nombre del 
+	 * método. Estos métodos siguen una convención de nombres 
+	 * específica que indica la consulta que deben ejecutar, 
+	 * evitando la necesidad de escribir manualmente consultas 
+	 * JPQL (Java Persistence Query Language) o SQL.
+	 * 
+	 * https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html
+	 * 
+	 */
+	/*
+	 * Crear una búsqueda todos los roles que cumplan con una palabra
+	 * en la descripción.
+	 * SELECT * FROM roles WHERE description LIKE(%?%)
+	 */
+	Iterable<Role> findAllByDescriptionContaining(String description);
 
 }

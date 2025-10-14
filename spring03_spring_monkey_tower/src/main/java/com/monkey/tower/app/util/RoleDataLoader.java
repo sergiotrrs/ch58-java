@@ -1,5 +1,7 @@
 package com.monkey.tower.app.util;
 
+
+
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -48,7 +50,8 @@ public class RoleDataLoader implements CommandLineRunner{
 	public void run(String... args) throws Exception {
 		// System.out.println("===== Se Ejecuta RoleDataLoader =====");
 		log.info("===== Se Ejecuta RoleDataLoader =====");
-		
+
+		//  ---------  CREATE --------- 
 		roleRepository.save(new Role(1L, "ADMIN", "Acceso total al sistema") );
 		// TODO 1: Crear 3 roles más (Customer, Warehouse-Manager, Support-agent)
 		roleRepository.save(new Role(2L, "Warehouse-Manager", "Acceso al almacen"));
@@ -64,12 +67,32 @@ public class RoleDataLoader implements CommandLineRunner{
 		// ============ Encontrar un role =========================
 		Optional<Role> optionalRole = roleRepository.findById(4L);		
 		if( optionalRole.isPresent()) {
+		//  ---------  READ ---------
 			Role existingRole = optionalRole.get();
 			log.info("Role encontrado: " + existingRole);
+		//  ---------  UPDATE ---------
+			existingRole.setDescription("Descripción modificada");
+			roleRepository.save(existingRole);
 		} else {
 			log.warn("El role no fue encontrado");
 		}
 		
+		roles = roleRepository.findAll();
+		for (Role role : roles) {
+			log.info("Role Description:" + role);
+		}
+		
+		// ============ Borrar un role =========================
+		boolean existingRole = roleRepository.existsById(3L);
+		if( existingRole) {
+			log.info("Role encontrado, se procede a eliminarlo");
+			roleRepository.deleteById(3L);
+		}
+		
+		roles = roleRepository.findAll();
+		for (Role role : roles) {
+			log.info("Role Description:" + role);
+		}
 	}
 
 }

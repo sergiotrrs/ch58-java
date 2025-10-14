@@ -27,7 +27,7 @@ import com.monkey.tower.app.repository.RoleRepository;
 @Component
 @Order(1)
 @Profile("devH2")
-public class RolaDataLoader implements CommandLineRunner{
+public class RoleDataLoader implements CommandLineRunner{
 
 	/**
 	 *  - Logger permite definir niveles( TRACE, DEBBUG, INFO, WARN, ERROR).
@@ -35,11 +35,11 @@ public class RolaDataLoader implements CommandLineRunner{
 	 *  - Personalizar el formato.
 	 *  - Se integra mejor con otras herramientas para un monitoreo avanzado
 	 */
-	private static final Logger log = LoggerFactory.getLogger( RolaDataLoader.class);
+	private static final Logger log = LoggerFactory.getLogger( RoleDataLoader.class);
 	
 	private final RoleRepository roleRepository;
 		
-	public RolaDataLoader(RoleRepository roleRepository) {
+	public RoleDataLoader(RoleRepository roleRepository) {
 		this.roleRepository = roleRepository;
 	}
 

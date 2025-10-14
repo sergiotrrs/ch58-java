@@ -1,12 +1,15 @@
 package com.monkey.tower.app.model;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -41,6 +44,12 @@ public class Role {
 	private String name;
 	@Column(name="description", length=150, nullable=true)
 	private String description;
+	
+	// Relación ManyToMany inversa con User
+    // 'mappedBy' indica que la relación es propiedad de la entidad 'User'
+    // a través del campo 'roles' en la clase User.
+	@ManyToMany(mappedBy = "roles")
+	private Set<User> users = new HashSet<>();
 	
 	public Role() {}
 	

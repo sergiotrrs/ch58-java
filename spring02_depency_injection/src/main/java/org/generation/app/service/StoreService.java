@@ -8,10 +8,11 @@ import org.springframework.stereotype.Service;
 public class StoreService {
 
 //	@Autowired // Spring inyectará el bean
-	@Qualifier("bancomer")
+//	@Qualifier("bancomer")
 	private PaymentTerminal terminal;
 
-	public StoreService(PaymentTerminal terminal) {
+	
+	public StoreService(@Qualifier("bancomer") PaymentTerminal terminal) {
 		this.terminal = terminal;
 	}
 

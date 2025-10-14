@@ -52,11 +52,11 @@ public class RoleDataLoader implements CommandLineRunner{
 		log.info("===== Se Ejecuta RoleDataLoader =====");
 
 		//  ---------  CREATE --------- 
-		roleRepository.save(new Role(1L, "ADMIN", "Acceso total al sistema") );
+		roleRepository.save(new Role("ADMIN", "Acceso total al sistema") );
 		// TODO 1: Crear 3 roles más (Customer, Warehouse-Manager, Support-agent)
-		roleRepository.save(new Role(2L, "Warehouse-Manager", "Acceso al almacen"));
-		roleRepository.save(new Role(3L, "Support-Agent", "Soporte del sistema"));
-		roleRepository.save(new Role(4L, "Customer", "Acceso a visualizar productos"));
+		roleRepository.save(new Role(null, "Warehouse-Manager", "Acceso al almacen"));
+		roleRepository.save(new Role(null, "Support-Agent", "Soporte del sistema"));
+		roleRepository.save(new Role(null, "Customer", "Acceso a visualizar productos"));
 		
 		// ============ Obtener todos los roles ===================
 		Iterable<Role> roles = roleRepository.findAll();

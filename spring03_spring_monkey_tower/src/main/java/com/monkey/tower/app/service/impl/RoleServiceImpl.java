@@ -23,9 +23,29 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public RoleDto save(RoleDto role) {
-		// TODO Auto-generated method stub
-		return null;
+	public RoleDto save(RoleDto roleDto) {
+		roleDto.setIdentificador(null);
+		// TODO verificar que el nombre no exista
+		Role roleToSave = roleDtoToRole(roleDto); 
+		Role createdRole = roleRepository.save(roleToSave);
+		return roleToRoleDto(createdRole);
+	}
+	
+	private Role roleDtoToRole(RoleDto roleDto) {
+		Role role = new Role();
+		role.setId(roleDto.getIdentificador());
+		role.setName(roleDto.getNombre());
+		role.setDescription(roleDto.getDescripcion());
+		return role;
+	}
+	
+	private RoleDto roleToRoleDto(Role role) {
+		RoleDto roleDto = new RoleDto(
+				role.getId(), 
+				role.getName(), 
+				role.getDescription()
+				);
+		return roleDto;
 	}
 
 	@Override

@@ -6,6 +6,8 @@ public class RoleDto {
 	private String nombre;
 	private String descripcion;
 	
+	public RoleDto() {}
+	
 	public RoleDto(Long identificador, String nombre, String descripcion) {
 		this.identificador = identificador;
 		this.nombre = nombre;

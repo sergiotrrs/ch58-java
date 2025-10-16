@@ -3,6 +3,7 @@ package com.monkey.tower.app.service.impl;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -50,8 +51,13 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public RoleDto findById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		Optional<Role> roleOptional = roleRepository.findById(id);
+		if(roleOptional.isEmpty()) {
+			throw new IllegalStateException("Role does not exist with id " + id);
+		}
+		Role existingRole = roleOptional.get();
+		
+		return roleToRoleDto(existingRole);
 	}
 
 	@Override
@@ -66,15 +72,34 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public RoleDto update(Long id, RoleDto role) {
-		// TODO Auto-generated method stub
-		return null;
+	public RoleDto update(Long id, RoleDto roleDto) {
+		Optional<Role> roleOptional = roleRepository.findById(id);
+		if(roleOptional.isEmpty()) {
+			throw new IllegalStateException("Role does not exist with id " + id);
+		}
+		Role existingRole = roleOptional.get(); // role leido de la DB
+		
+		Role newRole = roleDtoToRole(roleDto);
+		//========== Solo cambiar los atributos permitidos
+		existingRole.setName(newRole.getName());
+		existingRole.setDescription(newRole.getDescription());
+		;
+		return roleToRoleDto(roleRepository.save(existingRole));
 	}
 
 	@Override
 	public void deleteByID(Long id) {
-		// TODO Auto-generated method stub
+		Optional<Role> roleOptional = roleRepository.findById(id);
+		if(roleOptional.isEmpty()) {
+			throw new IllegalStateException("Role does not exist with id " + id);
+		}
+		Role existingRole = roleOptional.get(); // role leido de la DB
+		// Hacer un update si hacemos un borrado lógico
+//		existingRole.active = false;
+//		roleRepository.save(existingRole);
 		
+		// Hacer un borrado real
+		roleRepository.delete(existingRole);		
 	}
 
 	@Override

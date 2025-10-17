@@ -1,10 +1,14 @@
 package com.monkey.tower.app.service.impl;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.monkey.tower.app.model.Role;
 import com.monkey.tower.app.model.User;
 import com.monkey.tower.app.repository.UserRepository;
 import com.monkey.tower.app.service.UserService;
@@ -25,6 +29,12 @@ public class UserServiceImpl implements UserService {
 		// TODO verificar si el usuario existe
 		// Si existe lanzar una excepcion
 		user.setPassword(passwordEncoder.encode( user.getPassword()) );
+		
+		Set<Role> roles = new HashSet<>();
+		// TODO buscar con el service de Role el id para "CUSTOMER"
+		roles.add(new Role(4L, null, null));
+		user.setRoles( roles   );
+		
 		System.out.println(user);
 		return userRepository.save(user);
 	}

@@ -4,6 +4,8 @@ import com.monkey.tower.app.controller.RoleController;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.userdetails.User;
@@ -35,7 +37,7 @@ public class WebSecurityConfig {
 		this.roleController = roleController;
 	}
 
-	@Bean
+	// @Bean
 	UserDetailsService userDetailsService() {
 		UserDetails sergio = User.builder().username("Sercholo")
 				.password("$2a$10$zeoNjnnrm335ZBS4P./7zeDKxWrZu6zgntcCPe4ZIe/wjlFwa83/K").roles("CHOLO").build();
@@ -64,6 +66,12 @@ public class WebSecurityConfig {
 	public static void main(String[] args) {
 		System.out.println(new BCryptPasswordEncoder().encode("123"));
 	}
+	
+	@Bean
+    AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
+        // Expone el gestor de autenticación de Spring para que lo podamos usar en nuestro controlador de login.
+        return config.getAuthenticationManager();
+    }
 
 	@Bean
 	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -79,6 +87,7 @@ public class WebSecurityConfig {
 						
 						// Rutas exclusivas para ADMIN
 						.requestMatchers("/api/v1/roles/**").hasRole("ADMIN")
+						.requestMatchers("/h2-console/**").hasRole("ADMIN")
 						// .requestMatchers(HttpMethod.GET,"/api/v1/users").hasRole("ADMIN")
 						
 						// Rutas para los clientes

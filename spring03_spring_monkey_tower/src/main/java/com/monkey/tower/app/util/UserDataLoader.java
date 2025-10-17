@@ -33,6 +33,7 @@ public class UserDataLoader implements CommandLineRunner {
 		bob.setFirstName("Bob");
 		bob.setLastName("Esponja");
 		bob.setEmail("bob@nickelodeon.com");
+		bob.setPassword(passwordEncoder.encode("recetasecreta"));
 				
 		Set<Role> roles = new HashSet<>();
 		roles.add(new Role(4L, null, null)); // CUSTOMER en la clase RoleDataLoader

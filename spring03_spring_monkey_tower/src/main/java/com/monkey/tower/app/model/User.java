@@ -82,6 +82,135 @@ public class User {
 	// @ManyToOne
 	// Role role;
 
+	public User() {}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+
+	public LocalDate getBirthDate() {
+		return birthDate;
+	}
+
+	public void setBirthDate(LocalDate birthDate) {
+		this.birthDate = birthDate;
+	}
+
+	public String getAvatarUrl() {
+		return avatarUrl;
+	}
+
+	public void setAvatarUrl(String avatarUrl) {
+		this.avatarUrl = avatarUrl;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("User [id=");
+		builder.append(id);
+		builder.append(", firstName=");
+		builder.append(firstName);
+		builder.append(", lastName=");
+		builder.append(lastName);
+		builder.append(", email=");
+		builder.append(email);
+		builder.append(", password=");
+		builder.append(password);
+		builder.append(", phoneNumber=");
+		builder.append(phoneNumber);
+		builder.append(", birthDate=");
+		builder.append(birthDate);
+		builder.append(", avatarUrl=");
+		builder.append(avatarUrl);
+		builder.append(", active=");
+		builder.append(active);
+		builder.append(", createdAt=");
+		builder.append(createdAt);
+		builder.append(", updatedAt=");
+		builder.append(updatedAt);
+		builder.append("]");
+		return builder.toString();
+	}
+	
+	
+	
 }
 
 

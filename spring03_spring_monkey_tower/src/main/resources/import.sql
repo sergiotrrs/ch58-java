@@ -1,0 +1,1 @@
+-- INSERT INTO `roles`(nombre_role, description) VALUES("SQL_ROLE","Role desde SQL");

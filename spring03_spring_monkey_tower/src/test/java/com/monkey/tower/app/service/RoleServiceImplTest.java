@@ -1,13 +1,20 @@
 package com.monkey.tower.app.service;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -49,6 +56,7 @@ public class RoleServiceImplTest {
 		customer = new Role(4L, "CUSTOMER", "Cliente del sitio");		
 	}
 	
+	@Test
 	void testFindAll() {
 		
 		// STEP 4 Arrange: Preparar el escenario
@@ -61,7 +69,43 @@ public class RoleServiceImplTest {
 		Iterable<RoleDto> rolesDto = roleService.findAll();
 		
 		// STEP 6 Assert: Verficar los resultados.
-		assertNotNull(rolesDto);		
+		assertNotNull(rolesDto);
+		assertEquals( 2, ((List)rolesDto).size() );
+		RoleDto roleCustomerDto = (RoleDto) ((ArrayList)rolesDto).get(1); 
+		assertEquals("CUSTOMER",  roleCustomerDto.getNombre() );
+		
+		// Verificar que el método reoleRepository.findAll() se llama una sola vez
+		verify( roleRepository, times(1)).findAll();
+	}
+	
+	@Test
+	@DisplayName("findById: Debe devolver un rol cuando el ID exista")
+	void testFindByIdFound() {
+		// STEP 4 Arrange: Preparar el escenario
+		when(roleRepository.findById(1L)).thenReturn(Optional.of(admin));
+		
+		// STEP 5 Act: Ejecutamos el método a probar
+		RoleDto roleAdminDto = roleService.findById(1L);
+		
+		// STEP 6 Assert: Verficar los resultados.
+		assertNotNull(roleAdminDto);
+		assertEquals("ADMIN", roleAdminDto.getNombre());
+		assertEquals(1L, roleAdminDto.getIdentificador());
+		assertEquals("Administrador del sitio", roleAdminDto.getDescripcion());
+		verify( roleRepository, times(1)).findById(1L);
+		
+	}
+	
+	@Test
+	@DisplayName("findById: Debe lanzar una excepción si el ID no existe")
+	void testFindByIdNotFound() {
+		// STEP 4 Arrange: Preparar el escenario
+		when(roleRepository.findById(10L)).thenReturn(Optional.empty());
+		
+		// STEP 5 y 6 Act & Assert: Ejecutamos el método a probar
+		IllegalStateException exception = assertThrows( IllegalStateException.class, ()-> roleService.findById(10L) );  
+		assertEquals("Role does not exist with id 10", exception.getMessage());
+		
 	}
 	
 

@@ -3,6 +3,7 @@ package com.monkey.tower.app.service;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -107,6 +108,54 @@ public class RoleServiceImplTest {
 		assertEquals("Role does not exist with id 10", exception.getMessage());
 		
 	}
+	
+	@Test
+    @DisplayName("update: Debe actualizar y devolver el rol si el ID existe")
+    void testUpdateFound() {
+        // Arrange
+        Long roleId = 1L;
+        RoleDto updatedDto = new RoleDto(roleId, "ADMIN_UPDATED", "Descripción actualizada");
+        Role existingRole = new Role(roleId, "ADMIN_OLD", "Descripción vieja"); // Simula rol de la DB
+        Role roleToBeSaved = new Role(roleId, "ADMIN_UPDATED", "Descripción actualizada"); // Rol después de aplicar cambios
+
+        // Mockear findById para devolver el rol existente
+        when(roleRepository.findById(roleId)).thenReturn(Optional.of(existingRole));
+        // Mockear save para devolver el rol "guardado" (con los datos actualizados)
+        when(roleRepository.save(any(Role.class))).thenReturn(roleToBeSaved);
+
+        // Act
+        RoleDto resultDto = roleService.update(roleId, updatedDto);
+
+        // Assert
+        assertNotNull(resultDto);
+        assertEquals(roleId, resultDto.getIdentificador());
+        assertEquals("ADMIN_UPDATED", resultDto.getNombre());
+        assertEquals("Descripción actualizada", resultDto.getDescripcion());
+
+        // Verifica las interacciones
+        verify(roleRepository, times(1)).findById(roleId);
+        verify(roleRepository, times(1)).save(roleToBeSaved);
+        
+        
+    }
+	
+	@Test
+    @DisplayName("deleteByID: Debe eliminar el rol si el ID existe")
+    void testDeleteByIdFound() {
+        // Arrange
+        Long roleId = 1L;
+        Role existingRole = new Role(roleId, "ADMIN", "A eliminar");
+
+        // Mockear findById para devolver el rol existente
+        when(roleRepository.findById(roleId)).thenReturn(Optional.of(existingRole));
+      
+        // Act
+        roleService.deleteByID(roleId);
+
+        // Assert (Verificar interacciones)
+        verify(roleRepository, times(1)).findById(roleId);
+        verify(roleRepository, times(1)).delete(existingRole);
+    }
 	
 
 }

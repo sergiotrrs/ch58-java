@@ -28,6 +28,7 @@ public class AuthController {
 	 * - toString
 	 */
 	public record LoginRequest(String email, String password) {}
+	public record JwtResponse(String token) {}
 	
 	private final JwtService jwtService;
 	private final AuthenticationManager authenticationManager;
@@ -38,19 +39,19 @@ public class AuthController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<String> authentication(@RequestBody LoginRequest loginRequest){
+	public ResponseEntity<JwtResponse> authentication(@RequestBody LoginRequest loginRequest){
 		
 		var authToken = new UsernamePasswordAuthenticationToken(
 				loginRequest.email, 
 				loginRequest.password
 				);
 		
-		// Validar si la autenticación es exitosa (manejado por String)
+		// Validar si la autenticación es exitosa (manejado por Spring)
 		Authentication authentication= authenticationManager.authenticate(authToken);
 		
 		String jwt = jwtService.generateToken(authentication);
 		
-		return ResponseEntity.ok(jwt);
+		return ResponseEntity.ok(new JwtResponse(jwt));
 		
 		
 	}

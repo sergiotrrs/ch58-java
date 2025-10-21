@@ -1,5 +1,6 @@
 package com.monkey.tower.app.security;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.monkey.tower.app.model.Role;
 import com.monkey.tower.app.model.User;
 import com.monkey.tower.app.repository.UserRepository;
 /**
@@ -36,6 +38,11 @@ public class JpaUserDetailsService implements UserDetailsService  {
         Set<GrantedAuthority> authorities = user.getRoles().stream()
                 .map(role -> new SimpleGrantedAuthority("ROLE_" + role.getName().toUpperCase()))
                 .collect(Collectors.toSet());
+        
+//		Set<GrantedAuthority> authorities2 = new HashSet<>();
+//		for (Role role : user.getRoles()) {
+//			authorities2.add(new SimpleGrantedAuthority("ROLE_" + role.getName().toUpperCase()));
+//		}
 
         // Devuelve un objeto UserDetails que Spring Security utiliza internamente
         return new org.springframework.security.core.userdetails.User(

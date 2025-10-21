@@ -74,7 +74,7 @@ public class WebSecurityConfig {
     }
 
 	@Bean
-	SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+	SecurityFilterChain filterChain(HttpSecurity http) throws Exception  {
 
 		return http
 				// Deshabilita CSRF porque las APIs REST stateless no lo necesitan si usan tokens.

@@ -1,6 +1,8 @@
 package com.monkey.tower.app.security;
 
 import com.monkey.tower.app.controller.RoleController;
+import com.monkey.tower.app.security.jwt.JwtAuthConverter;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -74,7 +76,7 @@ public class WebSecurityConfig {
     }
 
 	@Bean
-	SecurityFilterChain filterChain(HttpSecurity http) throws Exception  {
+	SecurityFilterChain filterChain(HttpSecurity http, JwtAuthConverter jwtAuthConverter) throws Exception  {
 
 		return http
 				// Deshabilita CSRF porque las APIs REST stateless no lo necesitan si usan tokens.
@@ -98,6 +100,9 @@ public class WebSecurityConfig {
 						// Cualquier otra petición debe ser autenticada
 						.anyRequest().authenticated()						
 						)
+						// Activa la validación de tokens JWT para cada petición.
+		                .oauth2ResourceServer(oauth2 -> oauth2.jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthConverter)))
+				
                 		// Le dice a Spring que no cree ni use sesiones HTTP. Cada petición es independiente.
                 		.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 		.httpBasic( withDefaults() ) 
